@@ -13,8 +13,15 @@ public class Station {
     private double breddegrad;
 
     @Column(nullable = false)
-    private double længdegrad;
+    private double laengdegrad;
 
+    public Station() {
+    }
+
+    public Station(double breddegrad, double laengdegrad) {
+        this.breddegrad = breddegrad;
+        this.laengdegrad = laengdegrad;
+    }
 
     /* ---------- Getters and Setters ------------- */
     public Long getId() {
@@ -34,10 +41,10 @@ public class Station {
     }
 
     public double getLængdegrad() {
-        return længdegrad;
+        return laengdegrad;
     }
 
-    public void setLængdegrad(double længdegrad) {
-        this.længdegrad = længdegrad;
+    public void setLængdegrad(double laengdegrad) {
+        this.laengdegrad = laengdegrad;
     }
 }

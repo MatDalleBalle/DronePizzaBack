@@ -15,6 +15,13 @@ public class Pizza {
     @Column(nullable = false)
     private int pris;
 
+    public Pizza() {
+    }
+
+    public Pizza(String titel, int pris) {
+        this.titel = titel;
+        this.pris = pris;
+    }
     /* ---------- Getters and Setters ------------- */
     public Long getId() {
         return id;

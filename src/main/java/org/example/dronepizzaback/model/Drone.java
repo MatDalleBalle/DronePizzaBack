@@ -31,6 +31,15 @@ public class Drone {
         UDFASET
     }
 
+    public Drone() {
+    }
+
+    public Drone(UUID serialNumber, Status status, Station station) {
+        this.serieNummer = serialNumber;
+        this.status = status;
+        this.station = station;
+    }
+
     /* ---------- Getters and Setters ------------- */
     public Long getId() {
         return id;

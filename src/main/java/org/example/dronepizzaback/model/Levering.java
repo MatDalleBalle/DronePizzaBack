@@ -27,6 +27,16 @@ public class Levering {
 
     private LocalDateTime faktiskLeveringstidsPunkt;
 
+    public Levering() {
+    }
+
+    public Levering(Drone drone, Pizza pizza, String adresse, LocalDateTime forventetLeveringstidsPunkt) {
+        this.drone = drone;
+        this.pizza = pizza;
+        this.adresse = adresse;
+        this.forventetLeveringstidsPunkt = forventetLeveringstidsPunkt;
+    }
+
     /* ---------- Getters and Setters ------------- */
     public Long getId() {
         return id;
