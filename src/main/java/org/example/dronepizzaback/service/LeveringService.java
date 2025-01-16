@@ -34,4 +34,8 @@ public class LeveringService {
         levering.setForventetLeveringsTidspunkt(LocalDateTime.now().plusMinutes(30));
         return leveringRepository.save(levering);
     }
+
+    public List<Levering> findLeveringerUdenDrone() {
+        return leveringRepository.findByDroneIsNull();
+    }
 }

@@ -23,4 +23,9 @@ public class LeveringController {
     public Levering addLevering(@RequestParam Long pizzaId, @RequestParam String adresse) {
         return leveringService.addLevering(pizzaId, adresse);
     }
+
+    @GetMapping("/queue")
+    public List<Levering> findLeveringerUdenDrone() {
+        return leveringService.findLeveringerUdenDrone();
+    }
 }

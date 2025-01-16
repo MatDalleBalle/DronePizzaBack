@@ -8,4 +8,6 @@ import java.util.List;
 
 public interface LeveringRepository extends JpaRepository <Levering, Long>{
     List<Levering> findByFaktiskLeveringsTidspunktIsNull();
+    List<Levering> findByDroneIsNull();
+
 }
