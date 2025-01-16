@@ -2,6 +2,8 @@ package org.example.dronepizzaback.model;
 
 import jakarta.persistence.*;
 
+import java.util.List;
+
 @Entity
 public class Station {
 
@@ -14,6 +16,9 @@ public class Station {
 
     @Column(nullable = false)
     private double laengdegrad;
+
+    @OneToMany(mappedBy = "station")
+    private List<Drone> droner;
 
     public Station() {
     }
@@ -40,11 +45,19 @@ public class Station {
         this.breddegrad = breddegrad;
     }
 
-    public double getLængdegrad() {
+    public double getLaengdegrad() {
         return laengdegrad;
     }
 
-    public void setLængdegrad(double laengdegrad) {
+    public void setLaengdegrad(double laengdegrad) {
         this.laengdegrad = laengdegrad;
+    }
+
+    public List<Drone> getDroner() {
+        return droner;
+    }
+
+    public void setDroner(List<Drone> droner) {
+        this.droner = droner;
     }
 }
