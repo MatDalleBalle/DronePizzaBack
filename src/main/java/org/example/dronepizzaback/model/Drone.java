@@ -1,5 +1,7 @@
 package org.example.dronepizzaback.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 
 import java.util.List;
@@ -20,9 +22,11 @@ public class Drone {
 
     @ManyToOne
     @JoinColumn(name = "station_id")
+    @JsonBackReference
     private Station station;
 
     @OneToMany(mappedBy = "drone")
+    @JsonManagedReference
     private List<Levering> leveringer;
 
     public enum Status {

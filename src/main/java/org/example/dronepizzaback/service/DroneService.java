@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.Comparator;
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 @Service
@@ -35,5 +36,16 @@ public class DroneService {
 
         Drone nyDrone = new Drone(UUID.randomUUID(), Drone.Status.I_DRIFT, stationMedMindstDroner);
         return droneRepository.save(nyDrone);
+    }
+
+    public Drone opdaterDroneStatus(Long id, Drone.Status status) {
+        Optional<Drone> droneOptional = droneRepository.findById(id);
+        if (droneOptional.isPresent()) {
+            Drone drone = droneOptional.get();
+            drone.setStatus(status);
+            return droneRepository.save(drone);
+        } else {
+            throw new IllegalStateException("Drone med id " + id + " findes ikke");
+        }
     }
 }

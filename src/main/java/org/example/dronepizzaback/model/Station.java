@@ -1,5 +1,6 @@
 package org.example.dronepizzaback.model;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 
 import java.util.List;
@@ -18,6 +19,7 @@ public class Station {
     private double laengdegrad;
 
     @OneToMany(mappedBy = "station")
+    @JsonManagedReference
     private List<Drone> droner;
 
     public Station() {

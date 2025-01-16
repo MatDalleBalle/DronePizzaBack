@@ -1,5 +1,6 @@
 package org.example.dronepizzaback.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 
 import java.time.LocalDateTime;
@@ -13,6 +14,7 @@ public class Levering {
 
     @ManyToOne
     @JoinColumn(name = "drone_id")
+    @JsonBackReference
     private Drone drone;
 
     @ManyToOne
@@ -23,18 +25,18 @@ public class Levering {
     private String adresse;
 
     @Column(nullable = false)
-    private LocalDateTime forventetLeveringstidsPunkt;
+    private LocalDateTime forventetLeveringsTidspunkt;
 
-    private LocalDateTime faktiskLeveringstidsPunkt;
+    private LocalDateTime faktiskLeveringsTidspunkt;
 
     public Levering() {
     }
 
-    public Levering(Drone drone, Pizza pizza, String adresse, LocalDateTime forventetLeveringstidsPunkt) {
+    public Levering(Drone drone, Pizza pizza, String adresse, LocalDateTime forventetLeveringsTidspunkt) {
         this.drone = drone;
         this.pizza = pizza;
         this.adresse = adresse;
-        this.forventetLeveringstidsPunkt = forventetLeveringstidsPunkt;
+        this.forventetLeveringsTidspunkt = forventetLeveringsTidspunkt;
     }
 
     /* ---------- Getters and Setters ------------- */
@@ -70,19 +72,20 @@ public class Levering {
         this.adresse = adresse;
     }
 
-    public LocalDateTime getForventetLeveringstidsPunkt() {
-        return forventetLeveringstidsPunkt;
+    public LocalDateTime getForventetLeveringsTidspunkt() {
+        return forventetLeveringsTidspunkt;
     }
 
-    public void setForventetLeveringstidsPunkt(LocalDateTime forventetLeveringstidsPunkt) {
-        this.forventetLeveringstidsPunkt = forventetLeveringstidsPunkt;
+    public void setForventetLeveringsTidspunkt(LocalDateTime forventetLeveringsTidspunkt) {
+        this.forventetLeveringsTidspunkt = forventetLeveringsTidspunkt;
     }
 
-    public LocalDateTime getFaktiskLeveringstidsPunkt() {
-        return faktiskLeveringstidsPunkt;
+    public LocalDateTime getFaktiskLeveringsTidspunkt() {
+        return faktiskLeveringsTidspunkt;
     }
 
-    public void setFaktiskLeveringstidsPunkt(LocalDateTime faktiskLeveringstidsPunkt) {
-        this.faktiskLeveringstidsPunkt = faktiskLeveringstidsPunkt;
+    public void setFaktiskLeveringsTidspunkt(LocalDateTime faktiskLeveringsTidspunkt) {
+        this.faktiskLeveringsTidspunkt = faktiskLeveringsTidspunkt;
     }
 }
+
