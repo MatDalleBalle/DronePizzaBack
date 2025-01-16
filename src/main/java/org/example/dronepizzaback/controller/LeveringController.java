@@ -34,4 +34,8 @@ public class LeveringController {
         return leveringService.scheduleLevering(leveringId, droneId);
     }
 
+    @PutMapping("/finish")
+    public Levering finishLevering(@RequestParam Long leveringId) {
+        return leveringService.finishLevering(leveringId);
+    }
 }

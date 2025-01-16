@@ -1,5 +1,6 @@
 package org.example.dronepizzaback.model;
 
+import ch.qos.logback.core.status.Status;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 
@@ -28,6 +29,16 @@ public class Levering {
     private LocalDateTime forventetLeveringsTidspunkt;
 
     private LocalDateTime faktiskLeveringsTidspunkt;
+
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
+    private Status status;
+
+    public enum Status {
+        IKKE_LEVERET,
+        I_GANG,
+        FAERDIG
+    }
 
     public Levering() {
     }
@@ -86,6 +97,14 @@ public class Levering {
 
     public void setFaktiskLeveringsTidspunkt(LocalDateTime faktiskLeveringsTidspunkt) {
         this.faktiskLeveringsTidspunkt = faktiskLeveringsTidspunkt;
+    }
+
+    public Status getStatus() {
+        return status;
+    }
+
+    public void setStatus(Status status) {
+        this.status = status;
     }
 }
 

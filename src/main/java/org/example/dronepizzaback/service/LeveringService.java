@@ -3,6 +3,7 @@ package org.example.dronepizzaback.service;
 import org.example.dronepizzaback.model.Drone;
 import org.example.dronepizzaback.model.Levering;
 import org.example.dronepizzaback.model.Pizza;
+import org.example.dronepizzaback.model.Levering.Status;
 import org.example.dronepizzaback.repository.DroneRepository;
 import org.example.dronepizzaback.repository.LeveringRepository;
 import org.example.dronepizzaback.repository.PizzaRepository;
@@ -36,6 +37,7 @@ public class LeveringService {
         levering.setAdresse(adresse);
         /* Sætter den forventede leveringstid til 30 minutter fra nu */
         levering.setForventetLeveringsTidspunkt(LocalDateTime.now().plusMinutes(30));
+        levering.setStatus(Status.IKKE_LEVERET);
         return leveringRepository.save(levering);
     }
 
@@ -59,6 +61,20 @@ public class LeveringService {
         }
 
         levering.setDrone(drone);
+        levering.setStatus(Status.I_GANG);
         return leveringRepository.save(levering);
     }
+
+    public Levering finishLevering(Long leveringId) {
+        Levering levering = leveringRepository.findById(leveringId)
+                .orElseThrow(() -> new IllegalStateException("Levering med id " + leveringId + " findes ikke"));
+
+        if (levering.getDrone() == null) {
+            throw new IllegalStateException("Levering har ingen tilknyttet drone");
+    }
+    levering.setStatus(Levering.Status.FAERDIG);
+    levering.setFaktiskLeveringsTidspunkt(LocalDateTime.now());
+    return leveringRepository.save(levering);
+    }
+
 }
