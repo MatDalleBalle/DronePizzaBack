@@ -1,7 +1,9 @@
 package org.example.dronepizzaback.service;
 
+import org.example.dronepizzaback.model.Drone;
 import org.example.dronepizzaback.model.Levering;
 import org.example.dronepizzaback.model.Pizza;
+import org.example.dronepizzaback.repository.DroneRepository;
 import org.example.dronepizzaback.repository.LeveringRepository;
 import org.example.dronepizzaback.repository.PizzaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +20,8 @@ public class LeveringService {
 
     @Autowired
     private PizzaRepository pizzaRepository;
+    @Autowired
+    private DroneRepository droneRepository;
 
     public List<Levering> alleIkkeLeveredeLeveringer() {
         return leveringRepository.findByFaktiskLeveringsTidspunktIsNull();
@@ -37,5 +41,24 @@ public class LeveringService {
 
     public List<Levering> findLeveringerUdenDrone() {
         return leveringRepository.findByDroneIsNull();
+    }
+
+    public Levering scheduleLevering(Long leveringId, Long droneId) {
+        Levering levering = leveringRepository.findById(leveringId)
+                .orElseThrow(() -> new IllegalStateException("Levering med id " + leveringId + " findes ikke"));
+
+        if (levering.getDrone() != null) {
+            throw new IllegalStateException("Levering er allerede i gang med at blive leveret");
+        }
+
+        Drone drone = droneRepository.findById(droneId)
+                .orElseThrow(() -> new IllegalStateException("Drone med id " + droneId + " findes ikke"));
+
+        if (drone.getStatus() != Drone.Status.I_DRIFT) {
+            throw new IllegalStateException("Drone er ikke i drift");
+        }
+
+        levering.setDrone(drone);
+        return leveringRepository.save(levering);
     }
 }

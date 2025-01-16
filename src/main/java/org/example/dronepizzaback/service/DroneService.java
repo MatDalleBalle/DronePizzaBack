@@ -48,4 +48,10 @@ public class DroneService {
             throw new IllegalStateException("Drone med id " + id + " findes ikke");
         }
     }
+
+    public Drone.Status getDroneStatus(Long droneId) {
+        Drone drone = droneRepository.findById(droneId)
+                .orElseThrow(() -> new IllegalStateException("Drone med id " + droneId + " findes ikke"));
+        return drone.getStatus();
+    }
 }

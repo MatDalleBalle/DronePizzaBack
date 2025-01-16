@@ -28,4 +28,10 @@ public class LeveringController {
     public List<Levering> findLeveringerUdenDrone() {
         return leveringService.findLeveringerUdenDrone();
     }
+
+    @PutMapping("/schedule")
+    public Levering scheduleLevering(@RequestParam Long leveringId, @RequestParam Long droneId) {
+        return leveringService.scheduleLevering(leveringId, droneId);
+    }
+
 }
