@@ -9,6 +9,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/drones")
+@CrossOrigin(origins = "http://localhost:63342")
 public class DroneController {
 
     @Autowired
