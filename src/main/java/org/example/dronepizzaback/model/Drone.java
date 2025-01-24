@@ -26,7 +26,7 @@ public class Drone {
     private Station station;
 
     @OneToMany(mappedBy = "drone")
-    @JsonManagedReference
+    @JsonBackReference
     private List<Levering> leveringer;
 
     public enum Status {

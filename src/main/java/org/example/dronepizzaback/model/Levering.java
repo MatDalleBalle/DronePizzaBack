@@ -15,7 +15,6 @@ public class Levering {
 
     @ManyToOne
     @JoinColumn(name = "drone_id")
-    @JsonBackReference
     private Drone drone;
 
     @ManyToOne
